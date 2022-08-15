@@ -133,6 +133,7 @@ class manager {
         global $DB;
         $newobject = new stdClass();
         $newobject->contenthash = $contenthash;
+        $newobject->filesize = $DB->get_field('files', 'filesize', ['contenthash' => $contenthash], IGNORE_MULTIPLE);
 
         $oldobject = $DB->get_record('tool_objectfs_objects', ['contenthash' => $contenthash]);
         if ($oldobject) {
