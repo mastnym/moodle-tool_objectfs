@@ -103,10 +103,6 @@ class client extends object_client_base {
             return false;
         }
 
-        if (empty($config->s3_region)) {
-            return false;
-        }
-
         if (empty($config->s3_usesdkcreds) && (empty($config->s3_key) || empty($config->s3_secret))) {
             return false;
         }
@@ -129,6 +125,8 @@ class client extends object_client_base {
             'region' => $config->s3_region,
             'version' => AWS_API_VERSION
         );
+
+        $options['use_path_style_endpoint'] = true;
 
         if (empty($config->s3_usesdkcreds)) {
             $options['credentials'] = array('key' => $config->s3_key, 'secret' => $config->s3_secret);
